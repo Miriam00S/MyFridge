@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Fridge {
     private List<Product> products = new ArrayList<>();
     private static final int MAX_UNAVAILABLE_INGREDIENTS = 3;
+    private final Scanner scanner = new Scanner(System.in);
 
 
     public Fridge(List<Product> ingredients) {
@@ -21,12 +24,20 @@ public class Fridge {
         this.products = products;
     }
 
-    public void addProduct(Product product){
+    //w tej metodzie będziemy się łączyć się z bazą danych
+    public void addProduct(){
+        System.out.println("Podaj nazwę produktu");
+        String name = scanner.nextLine();
+        scanner.close();
+        Product product = new Product(name);
         products.add(product);
     }
 
-    public void removeProduct(Product product){
-        products.remove(product);
+    public void removeProduct(){
+        System.out.println("Podaj nazwę produktu");
+        String name = scanner.nextLine();
+        scanner.close();
+        products.removeIf(product -> Objects.equals(product.getName(), name));
     }
 
     public void showProducts(){
@@ -38,16 +49,13 @@ public class Fridge {
     //sprawdzamy czy mamy w lodówce składniki z przepisu
     public List<Recipe> giveRecipes(List<Recipe> recipes){
         List<Recipe> proposedRecipes = new ArrayList<>();
-
         for (Recipe recipe: recipes) {
             List<Product> ingredients = recipe.getIngredients();
-            List<Product> ingredientsCopy = new ArrayList<>(ingredients);
-            ingredientsCopy.retainAll(products); //usuwamy składniki, które występują w liście products
-            int remainingIngredientsCount = ingredientsCopy.size();
+            ingredients.retainAll(products); //usuwamy składniki, które występują w liście products
+            int remainingIngredientsCount = ingredients.size();
             if (remainingIngredientsCount <= MAX_UNAVAILABLE_INGREDIENTS)
                 proposedRecipes.add(recipe);
         }
-
         return proposedRecipes;
     }
     

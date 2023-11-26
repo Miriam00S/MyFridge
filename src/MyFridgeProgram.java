@@ -1,27 +1,33 @@
+import java.util.Scanner;
+
 public class MyFridgeProgram {
 
     public static void main(String[] args) {
 
-        System.out.println("MyFridge v. 0.1");
-        Fridge fridge = new Fridge();
-
-        //dodajemy pare produktów do lodówki ręcznie
-
-        Product product = new Product("makaron penne");
-        Product product1 = new Product("kurczak");
-        Product product2 = new Product("szpinak");
-        Product product3 = new Product("śmietanka");
-        Product product4 = new Product("cytryna");
-        Product product5 = new Product("ogórek");
-        fridge.addProduct(product);
-        fridge.addProduct(product1);
-        fridge.addProduct(product2);
-        fridge.addProduct(product3);
-        fridge.addProduct(product4);
-        fridge.addProduct(product5);
-
-        fridge.showProducts();
+        System.out.println("MyFridge Console Version. 0.2");
+        menu();
 
     }
 
+    public static void menu(){
+        //1.open fridge
+        //1.1 display products
+        //1.2 ask fo recipes
+        //1.3 add product
+        //1.4 remove product
+        //1.5 display expired product
+        //1.6 close fridge
+        //2. exit
+        System.out.println("Open fridge - press 1 \nExit - press 2");
+        Scanner scanner = new Scanner(System.in);
+        int i = scanner.nextInt();
+        if (i == 1){
+
+        }else if (i == 2){
+            System.exit(0);
+        }else {
+            System.out.println("Niepoprawny numer");
+            menu(); //czy wykorzystanie rekurencji w tym miejścu jest dobrym rozwiązaniem?
+        }
+    }
 }
