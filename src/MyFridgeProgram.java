@@ -2,6 +2,7 @@ public class MyFridgeProgram {
 
     public static void main(String[] args) {
 
+        System.out.println("MyFridge v. 0.1");
         Fridge fridge = new Fridge();
 
         //dodajemy pare produktów do lodówki ręcznie
