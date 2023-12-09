@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Product {
     private String name;
     private String code;
-    private String expireDate; //data in calendar
+    private LocalDate expireDate;
     //imageIcon
 
     public Product(String name) {
@@ -11,7 +14,8 @@ public class Product {
     public Product(String name, String code, String expireDate) {
         this.name = name;
         this.code = code;
-        this.expireDate = expireDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.expireDate = LocalDate.parse(expireDate, formatter);
     }
 
     public String getName() {
@@ -20,5 +24,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDate getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(LocalDate expireDate) {
+        this.expireDate = expireDate;
     }
 }
